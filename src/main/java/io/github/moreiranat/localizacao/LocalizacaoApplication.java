@@ -2,6 +2,7 @@ package io.github.moreiranat.localizacao;
 
 import io.github.moreiranat.localizacao.domain.entity.Cidade;
 import io.github.moreiranat.localizacao.domain.repository.CidadeRepository;
+import io.github.moreiranat.localizacao.service.CidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class LocalizacaoApplication implements CommandLineRunner {
 
 	@Autowired
-	private CidadeRepository cidadeRepository;
+	private CidadeService cidadeService;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -21,40 +22,9 @@ public class LocalizacaoApplication implements CommandLineRunner {
 //		listarCidadesPorNome();
 //		listarCidadesPorHabitantes();
 //		listarCidadesPorNome();
+//		cidadeService.listarCidadesPorQuantidadeHabitantes();
 
-		listarCidadesPorQuantidadeHabitantes();
-	}
-
-	void listarCidadesPorQuantidadeHabitantes() {
-//		cidadeRepository.findByHabitantesLessThan(1000001L).forEach(System.out::println);
-//		cidadeRepository.findByHabitantesGreaterThan(1000001L).forEach(System.out::println);
-//		cidadeRepository.findByHabitantesLessThanEqual(1000000L).forEach(System.out::println);
-		cidadeRepository.findByHabitantesLessThanAndNomeLike(1000001L, "Br%").forEach(System.out::println);
-	}
-
-	void listarCidadesPorNome() {
-//		cidadeRepository.findByNome("Porto Velho").forEach(System.out::println); //para cada cidade, vai ser executado esse metodo
-//		cidadeRepository.findByNomeStartingWith("Porto").forEach(System.out::println);
-//		cidadeRepository.findByNomeEndingWith("za").forEach(System.out::println);
-//		cidadeRepository.findByNomeContaining("a").forEach(System.out::println);
-
-//		cidadeRepository.findByNomeLike("%a%").forEach(System.out::println);
-//		cidadeRepository.findByNomeLike("%za").forEach(System.out::println);
-		cidadeRepository.findByNomeLike("porto%").forEach(System.out::println); //like é case sensitive
-	}
-
-	void listarCidadesPorHabitantes() {
-		cidadeRepository.findByHabitantes(78787900L).forEach(System.out::println); //para cada cidade, vai ser executado esse metodo
-	}
-
-	@Transactional
-	void salvarCidade() {
-		var cidade = new Cidade(1L, "São Paulo",12396372L);
-		cidadeRepository.save(cidade);
-	}
-
-	void listarCidades() {
-		cidadeRepository.findAll().forEach(System.out::println); //para cada cidade, vai ser executado esse metodo
+		cidadeService.listarCidadesPorNome();
 	}
 
 	public static void main(String[] args) {
