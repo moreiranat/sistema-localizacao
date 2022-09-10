@@ -20,7 +20,16 @@ public class LocalizacaoApplication implements CommandLineRunner {
 //		listarCidades();
 //		listarCidadesPorNome();
 //		listarCidadesPorHabitantes();
-		listarCidadesPorNome();
+//		listarCidadesPorNome();
+
+		listarCidadesPorQuantidadeHabitantes();
+	}
+
+	void listarCidadesPorQuantidadeHabitantes() {
+//		cidadeRepository.findByHabitantesLessThan(1000001L).forEach(System.out::println);
+//		cidadeRepository.findByHabitantesGreaterThan(1000001L).forEach(System.out::println);
+//		cidadeRepository.findByHabitantesLessThanEqual(1000000L).forEach(System.out::println);
+		cidadeRepository.findByHabitantesLessThanAndNomeLike(1000001L, "Br%").forEach(System.out::println);
 	}
 
 	void listarCidadesPorNome() {
