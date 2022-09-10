@@ -19,3 +19,12 @@ values
     (10, 'Natal', 78978979),
     (11, 'Brasília', 12123132)
 ;
+
+--nome que comece com S e tenha qualquer coisa depois dele
+--select * from tb_cidade where nome like 'S%'
+--
+--StartingWith: comece com qualquer coisa e termine com zaq
+--select * from tb_cidade where nome like '%za'
+--
+--Containing: qualquer coisa antes do 'a', o 'a' no meio e qualquer coisa depois do 'a'
+--select * from tb_cidade where nome like '%a%'
