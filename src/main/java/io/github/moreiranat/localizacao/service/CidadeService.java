@@ -33,6 +33,15 @@ public class CidadeService {
         cidadeRepository.findByHabitantesLessThanAndNomeLike(1000001L, "Br%").forEach(System.out::println);
     }
 
+    public void listarCidadesPorNomeSql() {
+
+        cidadeRepository
+                .findByNomeSqlNativo("São Paulo")
+                .stream().map(cidadeProjection -> new Cidade(cidadeProjection.getId(), cidadeProjection.getNome(), null))
+                .forEach(System.out::println);
+    }
+
+
     public void listarCidadesPorNome() {
 //		cidadeRepository.findByNome("Porto Velho").forEach(System.out::println); //para cada cidade, vai ser executado esse metodo
 //		cidadeRepository.findByNomeStartingWith("Porto").forEach(System.out::println);
