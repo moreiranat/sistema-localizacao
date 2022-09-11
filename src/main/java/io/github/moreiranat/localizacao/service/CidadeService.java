@@ -2,11 +2,11 @@ package io.github.moreiranat.localizacao.service;
 
 import io.github.moreiranat.localizacao.domain.entity.Cidade;
 import io.github.moreiranat.localizacao.domain.repository.CidadeRepository;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class CidadeService {
@@ -50,5 +50,14 @@ public class CidadeService {
 
     void listarCidades() {
         cidadeRepository.findAll().forEach(System.out::println); //para cada cidade, vai ser executado esse metodo
+    }
+
+    public List<Cidade> filtroDinamico(Cidade cidade) {
+        ExampleMatcher matcher = ExampleMatcher
+                .matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.STARTING);
+        Example<Cidade> example = Example.of(cidade, matcher);
+        return cidadeRepository.findAll(example);
     }
 }
