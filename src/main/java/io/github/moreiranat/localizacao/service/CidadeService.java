@@ -2,7 +2,9 @@ package io.github.moreiranat.localizacao.service;
 
 import io.github.moreiranat.localizacao.domain.entity.Cidade;
 import io.github.moreiranat.localizacao.domain.repository.CidadeRepository;
+import static io.github.moreiranat.localizacao.domain.repository.specs.CidadeSpecs.*;
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,5 +61,12 @@ public class CidadeService {
                 .withStringMatcher(ExampleMatcher.StringMatcher.STARTING);
         Example<Cidade> example = Example.of(cidade, matcher);
         return cidadeRepository.findAll(example);
+    }
+
+    public void listarCidadesByNomeSpec() {
+
+        cidadeRepository
+                .findAll(nomeEqual( "São Paulo").and(idEqual(1L)))
+                .forEach(System.out::println);
     }
 }
